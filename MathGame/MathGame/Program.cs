@@ -12,7 +12,6 @@ namespace MathGame
             welcome();
             while (true)
             {
-                Console.Clear();
                 int ch = gameMenu();
                 if(ch == 5)
                 {
@@ -44,29 +43,48 @@ namespace MathGame
             var nums = randNo();
             int no1 = nums.Item1;
             int no2 = nums.Item2;
+            int res;
             Console.WriteLine("Give me the answer!!");
             switch (ch)
             {
                 case 1:
-                    int res = no1 + no2;
+                    res = no1 + no2;
                     Console.WriteLine($"{no1}+{no2}");
-                    int ans = Convert.ToInt32(Console.ReadLine());
-                    if(res == ans) 
+                    break;
+                case 2:
+                    res = no1 - no2;
+                    Console.WriteLine($"{no1}-{no2}");
+                    break;
+                case 3:
+                    res = no1 * no2;
+                    Console.WriteLine($"{no1}*{no2}");
+                    break;
+                case 4:
+                    while (no1 % no2 != 0)
                     {
-                        Console.WriteLine("You have got the right answer!!");
-                        return 1;
+                        nums = randNo();
+                        no1 = nums.Item1;
+                        no2 = nums.Item2;
                     }
-                    else
-                    {
-                        Console.WriteLine("Try again!!");
-                        return 0;
-                    }
+                    res = no1 / no2;
+                    Console.WriteLine($"{no1}/{no2}");
                     break;
                 default:
                     Console.WriteLine("thankyou");
                     return 0;
             }
-                    
+            int ans = Convert.ToInt32(Console.ReadLine());
+            if (res == ans)
+            {
+                Console.WriteLine("You have got the right answer!!");
+                return 1;
+            }
+            else
+            {
+                Console.WriteLine("Try again!!");
+                return 0;
+            }
+
         }
 
         private static int gameMenu()
